@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div id="main" class="container">
+        <div id="world" class="col-md-8">
+            <canvas></canvas>
+            <span class="help-block">
+                click in the world to put down a copy of the automaton you built in "build"<br>
+                or, if you just want to watch things go, click <a href="#">here</a>
+            </span>
+        </div>
+        <div id="workbench" class="col-md-4">
+            <h2>workbench</h2>
+            <form class="form-inline">
+                <h3>build</h3>
+                <span class="help-block">
+                    build a new automaton here by clicking and dragging in the box below
+                </span>
+                <canvas id="workbench-build"></canvas>
+
+                <div class="form-group">
+                    <input type="number" id="workbench-build-w" class="form-control size-input"
+                           min="1" max="1000" placeholder="width" /> x
+                    <input type="number" id="workbench-build-h" class="form-control size-input"
+                           min="1" max="1000" placeholder="height" />
+                    <button class="btn btn-default" id="workbench-build-resize">resize</button>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-default" id="workbench-build-togglegrid">show grid</button>
+                    <button class="btn btn-danger" id="workbench-build-clear">clear</button>
+                </div>
+                
+                <h3>test</h3>
+                <span class="help-block">
+                    test out your creation by clicking "go", or click "restart" to reset everything to the beginning
+                </span>
+
+                <canvas id="workbench-test"></canvas>
+
+                <div class="form-group">
+                    <input type="number" id="workbench-test-w" class="form-control size-input"
+                           min="1" max="1000" placeholder="width" /> x
+                    <input type="number" id="workbench-test-h" class="form-control size-input" 
+                           min="1" max="1000" placeholder="height" />
+                    <button class="btn btn-default" id="workbench-test-resize">resize</button>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" id="workbench-test-go">go</button>
+                    <button class="btn btn-default" id="workbench-test-restart">restart</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="/js/client.js"></script>
+</body>
+</html>
