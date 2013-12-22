@@ -39,6 +39,7 @@
     <Folder Include=".git\refs\remotes" />
     <Folder Include=".git\refs\remotes\origin" />
     <Folder Include=".git\refs\tags" />
+    <Folder Include="shared\" />
     <Folder Include="public\" />
     <Folder Include="public\js\" />
     <Folder Include="public\css\" />
@@ -46,6 +47,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="public\js\client.js" />
+    <Compile Include="shared\life.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
