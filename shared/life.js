@@ -104,6 +104,14 @@ Life.prototype.blit = function(sprite, spriteW, spriteH, x, y, tint) {
   }
 }
 
+Life.prototype.getWidth = function() {
+  return this._w;
+}
+
+Life.prototype.getHeight = function() {
+  return this._h;
+}
+
 Life.prototype.cellAt = function(x, y) {
   return cellInView(this._front, x, y, this._w, this._h);
 }

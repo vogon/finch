@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="public\js\client.js" />
+    <Compile Include="public\js\drawing.js" />
     <Compile Include="shared\life.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
