@@ -17,6 +17,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="package.json" />
+    <Content Include="Procfile" />
     <Content Include="public\css\main.css" />
     <Content Include="public\index.html" />
     <Content Include="README.md" />

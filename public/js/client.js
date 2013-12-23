@@ -98,10 +98,14 @@ var pendingTestResizeW, pendingTestResizeH;
 
 (function testLoop(testCanvas) {
   function resizeTestWorld(w, h) {
-    testCanvas.width = w;
-    testCanvas.height = h;
-    testCanvas.style.width = w + 'px';
-    testCanvas.style.height = h + 'px';
+    var testCanvasMaxWidth = $(testCanvas).parent().width();
+    var targetWidth = Math.floor(testCanvasMaxWidth / w) * w,
+        targetHeight = Math.floor(targetWidth * (h / w));
+
+    testCanvas.width = targetWidth;
+    testCanvas.height = targetHeight;
+    testCanvas.style.width = (targetWidth + 2) + 'px';
+    testCanvas.style.height = (targetHeight + 2) + 'px';
 
     testWorld = new Life(w, h);
     testViewer = new drawing.LifeViewer(testWorld);

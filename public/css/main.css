@@ -8,6 +8,11 @@
     height: 100%;
 }
 
+#workbench-test {
+    display: block;
+    border: 1px inset;
+}
+
 #workbench .size-input {
     width: 100px;
 }
