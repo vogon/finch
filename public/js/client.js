@@ -3,22 +3,8 @@
 var glider = new Int32Array(9);
 glider[1] = glider[5] = glider[6] = glider[7] = glider[8] = 0xffffffff;
 
-function runLife(world, canvas) {
-  var worldW = world.getWidth(), worldH = world.getHeight();
-  repaintLife(world, canvas);
-
-  // blit a new glider in
-  var blitX = Math.floor(Math.random() * worldW),
-      blitY = Math.floor(Math.random() * worldH);
-  var color = 0x7f000000 | Math.floor(Math.random() * 0xffffff);
-
-  world.blit(glider, 3, 3, blitX, blitY, color);
-
-  // update
-  world.next();
-}
-
-var worldCanvas = $("#world canvas")[0];
+var worldCanvas = $("#world canvas")[0],
+    testCanvas = $("#workbench-test")[0];
 
 var layoutW = worldCanvas.offsetWidth,
     layoutH = worldCanvas.offsetHeight;
@@ -34,8 +20,35 @@ worldCanvas.style.width = displayW + 'px';
 worldCanvas.style.height = displayH + 'px';
 
 var world = new Life(worldW, worldH);
+var viewer = new drawing.LifeViewer(world);
+
+testCanvas.width = testCanvas.height = 150;
+testCanvas.style.width = testCanvas.style.height = '150px';
+
+var testWorld = new Life(150, 150);
+var testViewer = new drawing.LifeViewer(testWorld);
+
+function runLife(world, viewer, canvas) {
+  var worldW = world.getWidth(), worldH = world.getHeight();
+  viewer.drawTo(canvas);
+
+  // blit a new glider in
+  var blitX = Math.floor(Math.random() * worldW),
+      blitY = Math.floor(Math.random() * worldH);
+  var color = 0xff000000 | Math.floor(Math.random() * 0xffffff);
+
+  world.blit(glider, 3, 3, blitX, blitY, color);
+
+  // update
+  world.next();
+}
 
 (function worldLoop() {
-  runLife(world, worldCanvas);
+  runLife(world, viewer, worldCanvas);
   window.requestAnimationFrame(worldLoop);
+})();
+
+(function testLoop() {
+  runLife(testWorld, testViewer, testCanvas);
+  window.requestAnimationFrame(testLoop);
 })();
