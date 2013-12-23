@@ -64,14 +64,15 @@ function nextCellInView(view, x, y, w, h) {
 }
 
 function Life(w, h) {
-  this._w = w;
-  this._h = h;
+  this._w = parseInt(w);
+  this._h = parseInt(h);
 
-  this._view1 = new view(w * h);
-  this._view2 = new view(w * h);
+  if (this._w <= 0 || this._h <= 0) {
+    throw new RangeError("invalid width or height");
+  }
 
-  this._front = this._view1;
-  this._back = this._view2;
+  this._front = new view(w * h);
+  this._back = new view(w * h);
 }
 
 Life.prototype.next = function() {

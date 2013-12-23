@@ -3,8 +3,7 @@
 var glider = new Int32Array(9);
 glider[1] = glider[5] = glider[6] = glider[7] = glider[8] = 0xffffffff;
 
-var worldCanvas = $("#world canvas")[0],
-    testCanvas = $("#workbench-test")[0];
+var worldCanvas = $("#world canvas")[0];
 
 var layoutW = worldCanvas.offsetWidth,
     layoutH = worldCanvas.offsetHeight;
@@ -21,12 +20,6 @@ worldCanvas.style.height = displayH + 'px';
 
 var world = new Life(worldW, worldH);
 var viewer = new drawing.LifeViewer(world);
-
-testCanvas.width = testCanvas.height = 150;
-testCanvas.style.width = testCanvas.style.height = '150px';
-
-var testWorld = new Life(150, 150);
-var testViewer = new drawing.LifeViewer(testWorld);
 
 function runLife(world, viewer, canvas) {
   var worldW = world.getWidth(), worldH = world.getHeight();
@@ -46,11 +39,6 @@ function runLife(world, viewer, canvas) {
 (function worldLoop() {
   runLife(world, viewer, worldCanvas);
   window.requestAnimationFrame(worldLoop);
-})();
-
-(function testLoop() {
-  runLife(testWorld, testViewer, testCanvas);
-  window.requestAnimationFrame(testLoop);
 })();
 
 // workbench modes
@@ -97,3 +85,47 @@ $("#workbench-mode-test").click(function() {
 
 changeBuildActive(true);
 changeTestActive(false);
+
+// workbench build form
+
+// workbench test form
+
+var testCanvas = $("#workbench-test")[0];
+
+var testWorld, testViewer;
+var pendingTestResizeRequest = false;
+var pendingTestResizeW, pendingTestResizeH;
+
+(function testLoop(testCanvas) {
+  function resizeTestWorld(w, h) {
+    testCanvas.width = w;
+    testCanvas.height = h;
+    testCanvas.style.width = w + 'px';
+    testCanvas.style.height = h + 'px';
+
+    testWorld = new Life(w, h);
+    testViewer = new drawing.LifeViewer(testWorld);
+  }
+
+  if (!testWorld || !testViewer) {
+    resizeTestWorld(150, 150);
+  } else if (pendingTestResizeRequest) {
+    resizeTestWorld(pendingTestResizeW, pendingTestResizeH);
+    pendingTestResizeW = pendingTestResizeH = null;
+    pendingTestResizeRequest = false;
+  }
+
+  runLife(testWorld, testViewer, testCanvas);
+  window.requestAnimationFrame(function() { testLoop(testCanvas); });
+})(testCanvas);
+
+$("#workbench-test-resize").click(function() {
+  var width = $("#workbench-test-w")[0].value,
+      height = $("#workbench-test-h")[0].value;
+
+  pendingTestResizeW = width;
+  pendingTestResizeH = height;
+  pendingTestResizeRequest = true;
+
+  return false;
+});
