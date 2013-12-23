@@ -52,3 +52,48 @@ function runLife(world, viewer, canvas) {
   runLife(testWorld, testViewer, testCanvas);
   window.requestAnimationFrame(testLoop);
 })();
+
+// workbench modes
+
+function changeBuildActive(show) {
+  var buildForm = $("#workbench-form-build")[0],
+      buildButton = $("#workbench-mode-build")[0];
+
+  if (show) {
+    $(buildButton).addClass("active");
+    $(buildForm).show();
+  } else {
+    $(buildButton).removeClass("active");
+    $(buildForm).hide();
+  }
+}
+
+function changeTestActive(show) {
+  var testForm = $("#workbench-form-test")[0],
+      testButton = $("#workbench-mode-test")[0];
+
+  if (show) {
+    $(testButton).addClass("active");
+    $(testForm).show();
+  } else {
+    $(testButton).removeClass("active");
+    $(testForm).hide();
+  }
+}
+
+$("#workbench-mode-build").click(function() {
+  changeBuildActive(true);
+  changeTestActive(false);
+
+  return false;
+});
+
+$("#workbench-mode-test").click(function() {
+  changeBuildActive(false);
+  changeTestActive(true);
+
+  return false;
+});
+
+changeBuildActive(true);
+changeTestActive(false);

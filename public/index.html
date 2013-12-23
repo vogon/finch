@@ -17,7 +17,11 @@
         <div id="workbench" class="col-md-4">
             <h2>workbench</h2>
             <form class="form-inline">
-                <h3>build</h3>
+                <button class="btn btn-lg btn-default active" id="workbench-mode-build">build</button>
+                <button class="btn btn-lg btn-default" id="workbench-mode-test">test</button>
+            </form>
+
+            <form id="workbench-form-build" class="form-inline">
                 <span class="help-block">
                     build a new automaton here by clicking and dragging in the box below
                 </span>
@@ -35,8 +39,9 @@
                     <button class="btn btn-default" id="workbench-build-togglegrid">show grid</button>
                     <button class="btn btn-danger" id="workbench-build-clear">clear</button>
                 </div>
-                
-                <h3>test</h3>
+            </form>
+            
+            <form id="workbench-form-test" class="form-inline">
                 <span class="help-block">
                     test out your creation by clicking "go", or click "restart" to reset everything to the beginning
                 </span>
